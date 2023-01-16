@@ -9,6 +9,7 @@ class BookSetter(BaseModel):
     pages: str
 
 
+
 class BookGetter(BaseModel):
     id: int
     title: str
