@@ -1,21 +1,10 @@
 from typing import Dict, List
 
-from src.scrapers import SCRAPERS
 from src.models.base import BaseScraper
+from src.scrapers import SCRAPERS
 
 
-from fastapi import FastAPI, HTTPException
-
-from src.db.connection import db_connection
-from src.models.sql import Book_table
-from src.serializers.book import BookGetter, BookSetter
-
-app = FastAPI()
-
-book_module = Book_table(db_connection)
-
-
-class Book_Scraper:
+class BookScraper:
     def _parse_scrapers(self, scrapers: list[str]) -> List:
         return [SCRAPERS[scraper]() for scraper in scrapers]
 

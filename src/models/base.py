@@ -1,19 +1,19 @@
 import math
+import os
 from abc import ABC, abstractmethod
 from decimal import DivisionByZero
 from typing import Dict, List, Optional, Tuple
-import pandas as pd
 
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from tqdm import tqdm
+from mysql.connector.connection_cext import CMySQLConnection
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from tqdm import tqdm
 
 from src.models.book import Book, BookLink
-
-from mysql.connector.connection_cext import CMySQLConnection
 
 
 class BaseScraper(ABC):
@@ -29,17 +29,13 @@ class BaseScraper(ABC):
         options.headless = True
         options.add_argument("--window-size=1920,1200")
 
-        s=Service('D:/Downloads/chromedriver.exe')
+        s=Service(os.getenv("SELENIUM_PATH"))
         driver = webdriver.Chrome(service=s,options=options)
         driver.get(f"{self.__domain__}/{query}")
 
         if requests.get(f"{self.__domain__}/{query}").status_code == 200:
             return BeautifulSoup(driver.page_source)
         raise Exception("Cannot reach content!")
-
-    @abstractmethod
-    def _retrieve_book_info(self, link: BookLink) -> Optional[Book]:
-        pass
 
     def scrape(self, books_count: int, keyword: str) -> List[Optional[Book]]:
         try:
