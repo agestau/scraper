@@ -24,6 +24,7 @@ safety = "^1.10.3"
 mypy = "^0.971"
 bandit = "^1.7.4"
 isort = "^5.10.1"
+ipykernel = "^6.20.2"
 
 [tool.flake8]
 exclude = '''
