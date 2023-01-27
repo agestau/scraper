@@ -3,7 +3,11 @@
 ## About
 
 * This script combines two tools: Selenium and BeautifulSoup to scrape books from two different websites. 
-* If desired, results can be saved as a .csv file.
+* Results are saved as a .csv file.
+
+## Dependencies
+
+* Firefox web browser
 
 
 ## Instructions
