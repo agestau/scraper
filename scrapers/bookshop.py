@@ -1,4 +1,3 @@
-# import time
 from typing import List, Dict
 from utils.utils import get_content, get_content_2
 
@@ -45,9 +44,6 @@ def scrape_books_bookshop(keyword: str, page_count: int):
         except AttributeError:
             categories = ""
 
-        # book_title = content.find("h1", class_="h1 leading-tight mb-2").text
-        # about = content.find("div", class_="mb-8 title-description show-links").text
-        # categories = content.find("div", class_="flex flex-wrap items-center").text.strip()
         full_books.append({
             "title": book_title, 
             "about": about,
